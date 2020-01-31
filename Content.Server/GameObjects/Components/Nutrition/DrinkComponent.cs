@@ -36,6 +36,8 @@ namespace Content.Server.GameObjects.Components.Nutrition
         [ViewVariables]
         private int _transferAmount = 2;
 
+        private int _maxVolume;
+
         public int MaxVolume
         {
             get => _contents.MaxVolume;
@@ -61,6 +63,7 @@ namespace Content.Server.GameObjects.Components.Nutrition
         {
             base.ExposeData(serializer);
             serializer.DataField(ref _initialContents, "contents", null);
+            serializer.DataField(ref _maxVolume, "max_volume", 0);
             serializer.DataField(ref _useSound, "use_sound", "/Audio/items/drink.ogg");
             // E.g. cola can when done or clear bottle, whatever
             // Currently this will enforce it has the same volume but this may change.
@@ -90,7 +93,15 @@ namespace Content.Server.GameObjects.Components.Nutrition
                 }
             }
 
-            _contents.MaxVolume = _initialContents.TotalVolume;
+            if (_initialContents != null)
+            {
+                _contents.MaxVolume = _initialContents.TotalVolume;
+            }
+            else
+            {
+                _contents.MaxVolume = _maxVolume;
+            }
+            
             _contents.SolutionChanged += HandleSolutionChangedEvent;
         }
 
