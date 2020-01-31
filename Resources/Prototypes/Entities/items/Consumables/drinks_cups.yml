@@ -8,6 +8,7 @@
   - type: Drink   
     max_volume: 4
     despawn_empty: false
+  - type: Sound
   - type: Sprite
     state: icon
   - type: Icon
