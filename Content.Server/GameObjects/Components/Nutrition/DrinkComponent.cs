@@ -93,14 +93,7 @@ namespace Content.Server.GameObjects.Components.Nutrition
                 }
             }
 
-            if (_initialContents != null)
-            {
-                _contents.MaxVolume = _initialContents.TotalVolume;
-            }
-            else
-            {
-                _contents.MaxVolume = _maxVolume;
-            }
+            _contents.MaxVolume = _maxVolume;
             
             _contents.SolutionChanged += HandleSolutionChangedEvent;
         }
